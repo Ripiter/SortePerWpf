@@ -11,10 +11,13 @@ namespace SortePerWpf
     /// </summary>
     public partial class MainWindow : Window
     {
+        Game game = new Game();
         public MainWindow()
         {
             InitializeComponent();
-            //steve.ItemsSource = people;
+            game.Start();
+            Console.WriteLine(game.RemoveDuplicates());
+            steve.ItemsSource = game.Players;
             this.DataContext = this;
         }
 

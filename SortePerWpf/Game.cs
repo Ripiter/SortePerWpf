@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Collections.ObjectModel;
 namespace SortePerWpf
 {
     class Game
     {
         Random rnd = new Random(DateTime.Now.Millisecond);
         List<Card> cards = new List<Card>();
-        private List<Player> players;
+        private ObservableCollection<Player> players;
 
-        public List<Player> Players
+        public ObservableCollection<Player> Players
         {
             get { return players; }
             set { players = value; }
@@ -20,7 +20,7 @@ namespace SortePerWpf
 
         public Game()
         {
-            Players = new List<Player>
+            Players = new ObservableCollection<Player>
             {
                 new Human("Peter"),
                 new Human("Rene"),
@@ -64,6 +64,8 @@ namespace SortePerWpf
                         cards.Add(card);
                 }
             }
+            Shufle();
+            System.Diagnostics.Debug.WriteLine(RemoveDuplicates());
         }
 
         /// <summary>

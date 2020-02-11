@@ -13,40 +13,62 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <ItemsControl Name="steve" ItemsSource="{Binding people}" HorizontalAlignment="Center"  Grid.Row="0">
+        
+      
+        <!--<ItemsControl Name="steve" Grid.Row="0">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel>
-                        <TextBlock Width="150" FontSize="24">
-
+                    <WrapPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <TextBlock  FontSize="24">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} have {1} amount of cards">
+                                    <Binding Path="Name" />
+                                    <Binding Path="PlayersCards.Count" />
+                                </MultiBinding>
+                            </TextBlock.Text>
                             <TextBlock.Style>
                                 <Style>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding Name}" Value="Jon">
-                                            <!--<Setter  Property="Block.Foreground" Value="Blue" />-->
-                                            <!--<Setter  Property="TextBlock.Background" Value="Blue" />-->
+                                            --><!--<Setter  Property="Block.Foreground" Value="Blue" />-->
+                                            <!--<Setter  Property="TextBlock.Background" Value="Blue" />--><!--
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
                             </TextBlock.Style>
-                            
-                            <TextBlock.Text>
-                                
-                                <MultiBinding StringFormat="{}{0} cards: {1}">
-                                    <Binding Path="Name" />
-                                    <Binding Path="AmountOfCards" />
-                                </MultiBinding>
-                            </TextBlock.Text>
                         </TextBlock>
                     </WrapPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
+        </ItemsControl>-->
+        <ItemsControl Name="steve">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border>
+                        <TextBlock FontSize="24">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} {1} cards ">
+                                    <Binding Path="Name" />
+                                    <Binding Path="PlayersCards.Count" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
         </ItemsControl>
+
         <Button Content="next player" HorizontalAlignment="Left" Margin="189,57,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
 
 
         <StackPanel Grid.Row="2">
             <TextBlock Name="MyTextBlock" Text="{Binding Name}"></TextBlock>
+            <!-- TO DO: add item source for the images make a list of imagecard -->
         </StackPanel>
 
     </Grid>
