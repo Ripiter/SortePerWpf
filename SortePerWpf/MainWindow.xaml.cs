@@ -14,21 +14,8 @@ namespace SortePerWpf
         public MainWindow()
         {
             InitializeComponent();
-            steve.ItemsSource = people;
+            //steve.ItemsSource = people;
             this.DataContext = this;
-        }
-
-        ObservableCollection<Person> people = new ObservableCollection<Person>
-        {
-            new Person("Jon", "15"),
-            new Person("Jack", "9"),
-            new Person("Stefan", "20")
-        };
-
-        Person currectPlayer;
-        public void RemovePerson()
-        {
-            people.RemoveAt(0);
         }
 
         
@@ -37,11 +24,11 @@ namespace SortePerWpf
         {
 
             // Set next player in line
-            if (nextPlayer >= people.Count)
-                nextPlayer = 0;
+            //if (nextPlayer >= people.Count)
+            //    nextPlayer = 0;
 
             
-            MyTextBlock.Dispatcher.BeginInvoke(new Action(() => MyTextBlock.DataContext = currectPlayer));
+            //MyTextBlock.Dispatcher.BeginInvoke(new Action(() => MyTextBlock.DataContext = currectPlayer));
             nextPlayer++;
         }
 
