@@ -71,5 +71,22 @@
             <!-- TO DO: add item source for the images make a list of imagecard -->
         </StackPanel>
 
+        <ItemsControl Name="wonder" Grid.Row="2">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border>
+                        <Image> </Image>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <!--<Image Name="wonderLand" Grid.Row="2"></Image>
+        <Image Name="wonderGe" HorizontalAlignment="Left" Height="100" Margin="421,89,0,-49" Grid.Row="2" VerticalAlignment="Top" Width="100"/>-->
+
     </Grid>
 </Window>

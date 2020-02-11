@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
@@ -17,11 +18,13 @@ namespace SortePerWpf
             InitializeComponent();
             game.Start();
             Console.WriteLine(game.RemoveDuplicates());
+            currectPlayer = game.Players[0];
+            MakeImageCards();
             steve.ItemsSource = game.Players;
             this.DataContext = this;
         }
 
-        
+        Player currectPlayer;
         int nextPlayer = 1;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -33,6 +36,19 @@ namespace SortePerWpf
             
             //MyTextBlock.Dispatcher.BeginInvoke(new Action(() => MyTextBlock.DataContext = currectPlayer));
             nextPlayer++;
+        }
+
+        public void MakeImageCards()
+        {
+            List<ImageCard> displayCards = new List<ImageCard>();
+
+            foreach (Card item in currectPlayer.PlayersCards)
+            {
+                ImageCard imgCard = new ImageCard(item);
+                displayCards.Add(imgCard);
+            }
+
+            wonder.ItemsSource = displayCards;
         }
 
     }

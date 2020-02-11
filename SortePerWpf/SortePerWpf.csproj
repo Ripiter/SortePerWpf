@@ -67,6 +67,7 @@
     <Compile Include="Computer.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Human.cs" />
+    <Compile Include="ImageCard.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
