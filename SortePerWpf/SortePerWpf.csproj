@@ -68,6 +68,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="Human.cs" />
     <Compile Include="ImageCard.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -99,6 +100,61 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\aceclubs.png" />
+    <Resource Include="Assets\acediamond.png" />
+    <Resource Include="Assets\acehearts.png" />
+    <Resource Include="Assets\acespade.png" />
+    <Resource Include="Assets\eightclubs.png" />
+    <Resource Include="Assets\eightdiamond.png" />
+    <Resource Include="Assets\eighthearts.png" />
+    <Resource Include="Assets\eightspade.png" />
+    <Resource Include="Assets\fiveclubs.png" />
+    <Resource Include="Assets\fivediamond.png" />
+    <Resource Include="Assets\fivehearts.png" />
+    <Resource Include="Assets\fivespade.png" />
+    <Resource Include="Assets\fourclubs.png" />
+    <Resource Include="Assets\fourdiamond.png" />
+    <Resource Include="Assets\fourhearts.png" />
+    <Resource Include="Assets\fourspade.png" />
+    <Resource Include="Assets\jackdiamond.png" />
+    <Resource Include="Assets\jackhearts.png" />
+    <Resource Include="Assets\jackspade.png" />
+    <Resource Include="Assets\JC.png" />
+    <Resource Include="Assets\KC.png" />
+    <Resource Include="Assets\kingdiamond.png" />
+    <Resource Include="Assets\kinghearts.png" />
+    <Resource Include="Assets\kingspade.png" />
+    <Resource Include="Assets\nineclubs.png" />
+    <Resource Include="Assets\ninediamond.png" />
+    <Resource Include="Assets\ninehearts.png" />
+    <Resource Include="Assets\ninespade.png" />
+    <Resource Include="Assets\QC.png" />
+    <Resource Include="Assets\queendiamond.png" />
+    <Resource Include="Assets\queenhearts.png" />
+    <Resource Include="Assets\queenspade.png" />
+    <Resource Include="Assets\sevenclubs.png" />
+    <Resource Include="Assets\sevendiamond.png" />
+    <Resource Include="Assets\sevenhearts.png" />
+    <Resource Include="Assets\sevenspade.png" />
+    <Resource Include="Assets\siclubs.png" />
+    <Resource Include="Assets\sixdiamond.png" />
+    <Resource Include="Assets\sixhearts.png" />
+    <Resource Include="Assets\sixspade.png" />
+    <Resource Include="Assets\tenclubs.png" />
+    <Resource Include="Assets\tendiamond.png" />
+    <Resource Include="Assets\tenhearts.png" />
+    <Resource Include="Assets\tenspade.png" />
+    <Resource Include="Assets\treeclubs.png" />
+    <Resource Include="Assets\treediamond.png" />
+    <Resource Include="Assets\treehearts.png" />
+    <Resource Include="Assets\treespade.png" />
+    <Resource Include="Assets\twoclubs.png" />
+    <Resource Include="Assets\twodiamond.png" />
+    <Resource Include="Assets\twohearts.png" />
+    <Resource Include="Assets\twospade.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

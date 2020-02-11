@@ -16,10 +16,13 @@ namespace SortePerWpf
         public MainWindow()
         {
             InitializeComponent();
+
             game.Start();
-            Console.WriteLine(game.RemoveDuplicates());
             currectPlayer = game.Players[0];
-            MakeImageCards();
+            MyTextBlock.DataContext = currectPlayer;
+            ShowImageCards();
+
+
             steve.ItemsSource = game.Players;
             this.DataContext = this;
         }
@@ -28,17 +31,18 @@ namespace SortePerWpf
         int nextPlayer = 1;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
             // Set next player in line
-            //if (nextPlayer >= people.Count)
-            //    nextPlayer = 0;
+            if (nextPlayer >= game.Players.Count)
+                nextPlayer = 0;
 
-            
-            //MyTextBlock.Dispatcher.BeginInvoke(new Action(() => MyTextBlock.DataContext = currectPlayer));
+            MyTextBlock.Dispatcher.BeginInvoke(new Action(() => MyTextBlock.DataContext = currectPlayer));
+
+            currectPlayer = game.Players[nextPlayer];
+            ShowImageCards();
             nextPlayer++;
         }
 
-        public void MakeImageCards()
+        public void ShowImageCards()
         {
             List<ImageCard> displayCards = new List<ImageCard>();
 

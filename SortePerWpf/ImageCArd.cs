@@ -14,16 +14,13 @@ namespace SortePerWpf
         public ImageCard(Card card)
         {
             //Uri temp = new Uri("/Assets/" + card.Number + ".png", UriKind.Relative );
-            Uri temp = new Uri(@"c:\1ofhearths.png", UriKind.Relative);
+            string temp = "/Assets/" + card.ToString() + ".png";
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
-            bitmap.UriSource = new Uri(@"c:\1ofhearths.png", UriKind.Absolute);
+            bitmap.UriSource = new Uri(temp, UriKind.Relative);
             bitmap.EndInit();
 
             Source = bitmap;
-
-            //img.Source = image;
-            //img.Source = Path.GetFullPath(@"c:\");
         }
     }
 }

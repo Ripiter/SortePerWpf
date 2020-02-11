@@ -65,7 +65,7 @@ namespace SortePerWpf
                 }
             }
             Shufle();
-            System.Diagnostics.Debug.WriteLine(RemoveDuplicates());
+            Log.AddToLog(RemoveDuplicates());
         }
 
         /// <summary>
@@ -113,13 +113,13 @@ namespace SortePerWpf
 
             switch ((CardType)colorId)
             {
-                case CardType.Diamonds:
+                case CardType.Diamond:
                     colorValue = 0;
                     break;
                 case CardType.Hearts:
                     colorValue = 0;
                     break;
-                case CardType.Spades:
+                case CardType.Spade:
                     colorValue = 1;
                     break;
                 case CardType.Clubs:

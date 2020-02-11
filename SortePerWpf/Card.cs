@@ -25,8 +25,8 @@ namespace SortePerWpf
     }
     public enum CardType
     {
-        Spades,
-        Diamonds,
+        Spade,
+        Diamond,
         Hearts,
         Clubs
     }
@@ -53,5 +53,10 @@ namespace SortePerWpf
         public CardNumber Number { get => number; set => number = value; }
         public CardType Type { get => type; set => type = value; }
         public CardColor Color { get => color; set => color = value; }
+
+        public override string ToString()
+        {
+            return number.ToString().ToLower() + type.ToString().ToLower();
+        }
     }
 }
