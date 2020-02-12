@@ -26,13 +26,7 @@ namespace SortePerWpf
 			set { message = value; }
 		}
 
-		private MessageType typeOfMessage;
-
-		public MessageType TypeOfMessage
-		{
-			get { return typeOfMessage; }
-			set { typeOfMessage = value; }
-		}
+		
 
 		private string messageTime;
 
@@ -44,10 +38,9 @@ namespace SortePerWpf
 
 
 
-		public LogMessage(string message, MessageType type)
+		public LogMessage(string message)
 		{
 			this.Message = message;
-			this.TypeOfMessage = type;
 		}
 
 

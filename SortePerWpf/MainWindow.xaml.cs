@@ -49,8 +49,8 @@ namespace SortePerWpf
             currentPlayer = game.Players[currentPlayerIndex];
             nextPlayer = game.Players[nextPlayerIndex];
 
-            Log.AddToLog(new LogMessage("before " + currentPlayer.Name + " has " + currentPlayer.PlayersCards.Count, MessageType.playersTurn));
-            Log.AddToLog(new LogMessage("before " + nextPlayer.Name + " has " + nextPlayer.PlayersCards.Count, MessageType.playersTurn));
+            Log.AddToLog(new LogMessage("before " + currentPlayer.Name + " has " + currentPlayer.PlayersCards.Count), MessageType.playersTurn);
+            Log.AddToLog(new LogMessage("before " + nextPlayer.Name + " has " + nextPlayer.PlayersCards.Count), MessageType.playersTurn);
            
 
             nextplayerText.DataContext = nextPlayer;
@@ -89,8 +89,8 @@ namespace SortePerWpf
                 //    nextPlayerEvent(this, new EventArgs());
             }
 
-            Log.AddToLog(new LogMessage("after " + currentPlayer.Name + " has " + currentPlayer.PlayersCards.Count, MessageType.playersTurn));
-            Log.AddToLog(new LogMessage("after " + nextPlayer.Name + " has " + nextPlayer.PlayersCards.Count, MessageType.playersTurn));
+            Log.AddToLog(new LogMessage("after " + currentPlayer.Name + " has " + currentPlayer.PlayersCards.Count), MessageType.playersTurn);
+            Log.AddToLog(new LogMessage("after " + nextPlayer.Name + " has " + nextPlayer.PlayersCards.Count), MessageType.playersTurn);
 
             if (game.CheckForLooser())
             {

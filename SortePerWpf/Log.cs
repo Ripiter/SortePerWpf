@@ -19,9 +19,9 @@ namespace SortePerWpf
         public static ObservableCollection<LogMessage> logs = new ObservableCollection<LogMessage>();
 
         static Color color;
-        public static void AddToLog(LogMessage logMessage)
+        public static void AddToLog(LogMessage logMessage, MessageType type)
         {
-            GetColor(logMessage.TypeOfMessage);
+            GetColor(type);
             logMessage.ColorOfMessage = new SolidColorBrush(color);
             logMessage.MessageTime = DateTime.Now.ToString();
             logs.Insert(0,logMessage);

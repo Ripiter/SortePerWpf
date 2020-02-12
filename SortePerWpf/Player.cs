@@ -47,7 +47,7 @@ namespace SortePerWpf
                 }
             }
             if(temp != string.Empty)
-                Log.AddToLog(new LogMessage(this.Name + " " + temp, MessageType.cardMatch));
+                Log.AddToLog(new LogMessage(this.Name + " " + temp), MessageType.cardMatch);
         }
 
 

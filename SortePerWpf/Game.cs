@@ -143,7 +143,7 @@ namespace SortePerWpf
             }
 
             if (temp != string.Empty)
-                Log.AddToLog(new LogMessage(temp,MessageType.cardMatch));
+                Log.AddToLog(new LogMessage(temp), MessageType.cardMatch);
         }
 
         /// <summary>
@@ -179,7 +179,7 @@ namespace SortePerWpf
             {
                 if (Players[i].PlayersCards.Count == 0)
                 {
-                    Log.AddToLog(new LogMessage(Players[i].Name + " was removed from the game",MessageType.playerRemoved));
+                    Log.AddToLog(new LogMessage(Players[i].Name + " was removed from the game"), MessageType.playerRemoved);
                     Players.Remove(Players[i]);
                 }
                 
