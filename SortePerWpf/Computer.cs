@@ -14,9 +14,6 @@ namespace SortePerWpf
         }
 
 
-        public override string TakeCard(Player player, int cardNumber)
-        {
-            return base.TakeCard(player, cardNumber);
-        }
+       
     }
 }

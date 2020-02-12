@@ -24,8 +24,8 @@ namespace SortePerWpf
             {
                 new Human("Peter"),
                 new Human("Rene"),
-                new Human("Marc")
-                //new Computer("C1"),
+                new Human("Marc"),
+                new Computer("C1")
                 //new Computer("C2"),
                 //new Computer("C3"),
                 //new Computer("C4"),
@@ -145,6 +145,19 @@ namespace SortePerWpf
         }
 
         /// <summary>
+        /// Takes card from another player
+        /// </summary>
+        public Card TakeCard(Player player, int cardPlace)
+        {
+            Card card = player.PlayersCards[cardPlace];
+
+            player.PlayersCards.Remove(card);
+            
+
+            return card;
+        }
+
+        /// <summary>
         /// Removes finished players and check if there is 1 player left
         /// </summary>
         /// <returns></returns>
@@ -160,10 +173,12 @@ namespace SortePerWpf
 
         void RemoveFinishedPlayers()
         {
+            
             for (int i = 0; i < Players.Count; i++)
             {
                 if (Players[i].PlayersCards.Count == 0)
                     Players.Remove(Players[i]);
+                
             }
         }
 

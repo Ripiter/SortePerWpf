@@ -29,19 +29,7 @@ namespace SortePerWpf
             this.Name = name;
         }
 
-        /// <summary>
-        /// Takes card from another player
-        /// </summary>
-        public virtual string TakeCard(Player player, int cardPlace)
-        {
-            Card card = player.PlayersCards[cardPlace];
-
-            player.PlayersCards.Remove(card);
-            int rndPos = new Random(DateTime.Now.Millisecond).Next(0, PlayersCards.Count);
-            this.PlayersCards.Insert(rndPos, card);
-
-            return RemovePairs(card);
-        }
+      
 
 
         public string RemovePairs(Card cardFromPlayer)

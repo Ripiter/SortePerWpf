@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Threading;
-
+using System.Diagnostics;
 namespace SortePerWpf
 {
     /// <summary>
@@ -18,28 +18,64 @@ namespace SortePerWpf
             InitializeComponent();
 
             game.Start();
-            currectPlayer = game.Players[0];
-            MyTextBlock.DataContext = currectPlayer;
-            ShowImageCards();
+            currentPlayer = game.Players[currentPlayerIndex];
+            
+            
 
 
             steve.ItemsSource = game.Players;
             this.DataContext = this;
         }
 
-        Player currectPlayer;
-        int nextPlayer = 1;
+        Player currentPlayer;
+        Player nextPlayer;
+        int currentPlayerIndex = 0;
+        int nextPlayerIndex = 1;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             // Set next player in line
-            if (nextPlayer >= game.Players.Count)
-                nextPlayer = 0;
+            if (nextPlayerIndex >= game.Players.Count)
+                nextPlayerIndex = 0;
 
-            MyTextBlock.Dispatcher.BeginInvoke(new Action(() => MyTextBlock.DataContext = currectPlayer));
+            if (currentPlayerIndex >= game.Players.Count)
+                currentPlayerIndex = 0;
 
-            currectPlayer = game.Players[nextPlayer];
+            currentPlayer = game.Players[currentPlayerIndex];
+            nextPlayer = game.Players[nextPlayerIndex];
+
+
+            Debug.WriteLine("Currect player index " + currentPlayerIndex);
+            Debug.WriteLine("Next player index " + nextPlayerIndex);
+            Debug.WriteLine("Current player name " + currentPlayer.Name);
+            Debug.WriteLine("Next player name " + nextPlayer.Name);
+
+            //MyTextBlock.DataContext = currentPlayer;
+            MyTextBlock.Dispatcher.BeginInvoke(new Action(() => MyTextBlock.DataContext = currentPlayer));
+
+
+            if (currentPlayer is Human)
+            {
+                Card card = game.TakeCard(nextPlayer, 0);
+                int rndPos = new Random(DateTime.Now.Millisecond).Next(0, currentPlayer.PlayersCards.Count);
+                currentPlayer.PlayersCards.Insert(rndPos, card);
+                currentPlayer.RemovePairs(card);
+            }
+            else
+            {
+                Card card = game.TakeCard(nextPlayer, 0);
+                int rndPos = new Random(DateTime.Now.Millisecond).Next(0, currentPlayer.PlayersCards.Count);
+                currentPlayer.PlayersCards.Insert(rndPos, card);
+                currentPlayer.RemovePairs(card);
+            }
+
+
+
             ShowImageCards();
-            nextPlayer++;
+
+            nextPlayerIndex++;
+            currentPlayerIndex++;
+
+            game.CheckForLooser();
         }
         bool funmode = false;
         public void ShowImageCards()
@@ -51,7 +87,7 @@ namespace SortePerWpf
             else
                 factory = new CustomPlayingCards();
 
-            List<ImageCard> displayCards = factory.GenerateImageCards(currectPlayer.PlayersCards);
+            List<ImageCard> displayCards = factory.GenerateImageCards(currentPlayer.PlayersCards);
 
             wonder.ItemsSource = displayCards;
         }
