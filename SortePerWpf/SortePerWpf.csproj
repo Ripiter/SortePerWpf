@@ -122,8 +122,8 @@
     <Resource Include="Assets\jackdiamond.png" />
     <Resource Include="Assets\jackhearts.png" />
     <Resource Include="Assets\jackspade.png" />
-    <Resource Include="Assets\JC.png" />
-    <Resource Include="Assets\KC.png" />
+    <Resource Include="Assets\jackclubs.png" />
+    <Resource Include="Assets\kingclubs.png" />
     <Resource Include="Assets\kingdiamond.png" />
     <Resource Include="Assets\kinghearts.png" />
     <Resource Include="Assets\kingspade.png" />
@@ -131,7 +131,7 @@
     <Resource Include="Assets\ninediamond.png" />
     <Resource Include="Assets\ninehearts.png" />
     <Resource Include="Assets\ninespade.png" />
-    <Resource Include="Assets\QC.png" />
+    <Resource Include="Assets\queenclubs.png" />
     <Resource Include="Assets\queendiamond.png" />
     <Resource Include="Assets\queenhearts.png" />
     <Resource Include="Assets\queenspade.png" />
