@@ -41,16 +41,17 @@ namespace SortePerWpf
             ShowImageCards();
             nextPlayer++;
         }
-
+        bool funmode = false;
         public void ShowImageCards()
         {
-            List<ImageCard> displayCards = new List<ImageCard>();
+            IFactory factory;
 
-            foreach (Card item in currectPlayer.PlayersCards)
-            {
-                ImageCard imgCard = new ImageCard(item);
-                displayCards.Add(imgCard);
-            }
+            if (funmode == false)
+                factory = new NormalPlayingCards();
+            else
+                factory = new CustomPlayingCards();
+
+            List<ImageCard> displayCards = factory.GenerateImageCards(currectPlayer.PlayersCards);
 
             wonder.ItemsSource = displayCards;
         }

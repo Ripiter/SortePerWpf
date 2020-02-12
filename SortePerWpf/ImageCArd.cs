@@ -11,13 +11,11 @@ namespace SortePerWpf
 {
     class ImageCard : Image
     {
-        public ImageCard(Card card)
+        public ImageCard(string path, Card card)
         {
-            //Uri temp = new Uri("/Assets/" + card.Number + ".png", UriKind.Relative );
-            string temp = "/Assets/" + card.ToString() + ".png";
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
-            bitmap.UriSource = new Uri(temp, UriKind.Relative);
+            bitmap.UriSource = new Uri(path, UriKind.Relative);
             bitmap.EndInit();
 
             Source = bitmap;
