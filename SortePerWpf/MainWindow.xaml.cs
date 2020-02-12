@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Windows;
-using System.Windows.Threading;
 using System.Diagnostics;
+using System.Windows;
 namespace SortePerWpf
 {
     /// <summary>
@@ -16,13 +13,8 @@ namespace SortePerWpf
         public MainWindow()
         {
             InitializeComponent();
-
             game.Start();
             currentPlayer = game.Players[currentPlayerIndex];
-            
-            
-
-
             steve.ItemsSource = game.Players;
             this.DataContext = this;
         }
@@ -31,8 +23,12 @@ namespace SortePerWpf
         Player nextPlayer;
         int currentPlayerIndex = 0;
         int nextPlayerIndex = 1;
+        bool gameover = false;
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (gameover == true)
+                return;
             // Set next player in line
             if (nextPlayerIndex >= game.Players.Count)
                 nextPlayerIndex = 0;
@@ -42,17 +38,11 @@ namespace SortePerWpf
 
             currentPlayer = game.Players[currentPlayerIndex];
             nextPlayer = game.Players[nextPlayerIndex];
-
-
-            Debug.WriteLine("Currect player index " + currentPlayerIndex);
-            Debug.WriteLine("Next player index " + nextPlayerIndex);
-            Debug.WriteLine("Current player name " + currentPlayer.Name);
-            Debug.WriteLine("Next player name " + nextPlayer.Name);
-
+            
             //MyTextBlock.DataContext = currentPlayer;
             MyTextBlock.Dispatcher.BeginInvoke(new Action(() => MyTextBlock.DataContext = currentPlayer));
-
-
+            nextplayerText.Dispatcher.BeginInvoke(new Action(() => nextplayerText.DataContext = nextplayerText));
+            
             if (currentPlayer is Human)
             {
                 Card card = game.TakeCard(nextPlayer, 0);
@@ -70,12 +60,15 @@ namespace SortePerWpf
 
 
 
-            ShowImageCards();
 
+            ShowImageCards();
             nextPlayerIndex++;
             currentPlayerIndex++;
 
-            game.CheckForLooser();
+            if (game.CheckForLooser())
+            {
+                gameover = true;
+            }
         }
         bool funmode = false;
         public void ShowImageCards()

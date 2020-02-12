@@ -52,7 +52,24 @@
 
 
         <StackPanel Grid.Row="1">
-            <TextBlock Name="MyTextBlock" Text="{Binding Name}" VerticalAlignment="Center" FontSize="24"></TextBlock>
+            <TextBlock Name="MyTextBlock" FontSize="24">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0} {1} cards ">
+                        <Binding Path="Name" />
+                        <Binding Path="PlayersCards.Count" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+
+            <TextBlock Name="nextplayerText" FontSize="24">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}Next player {0} has {1} cards ">
+                        <Binding Path="Name" />
+                        <Binding Path="PlayersCards.Count" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+
             <Button Content="next player" HorizontalAlignment="Left" Margin="189,57,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
             <!-- TO DO: add item source for the images make a list of imagecard -->
         </StackPanel>
