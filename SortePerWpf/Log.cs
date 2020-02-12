@@ -1,19 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace SortePerWpf
 {
-    // TO DO: Add option to display logs
+    enum MessageType
+    {
+        playerRemoved,
+        cardMatch,
+        playersTurn
+    }
     static class Log
     {
-        static List<string> logs = new List<string>();
+        public static ObservableCollection<LogMessage> logs = new ObservableCollection<LogMessage>();
 
-        public static void AddToLog(string message)
+        static Color color;
+        public static void AddToLog(LogMessage logMessage)
         {
-            logs.Add(string.Format("{0} {1}", DateTime.Now, message));
+            GetColor(logMessage.TypeOfMessage);
+            logMessage.ColorOfMessage = new SolidColorBrush(color);
+            logMessage.MessageTime = DateTime.Now.ToString();
+            logs.Insert(0,logMessage);
+        }
+
+        static void GetColor(MessageType type)
+        {
+            switch (type)
+            {
+                case MessageType.playerRemoved:
+                    color = Colors.Red;
+                    break;
+                case MessageType.cardMatch:
+                    color = Colors.Blue;
+                    break;
+                case MessageType.playersTurn:
+                    color = Colors.Green;
+                    break;
+                default:
+                    break;
+            }
         }
 
     }

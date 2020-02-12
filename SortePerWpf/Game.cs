@@ -65,7 +65,7 @@ namespace SortePerWpf
                 }
             }
             Shufle();
-            Log.AddToLog(RemoveDuplicates());
+            RemoveDuplicates();
         }
 
         /// <summary>
@@ -134,14 +134,16 @@ namespace SortePerWpf
         /// <summary>
         /// Removes all duplicates from all the players at the start of the game
         /// </summary>
-        public string RemoveDuplicates()
+        public void RemoveDuplicates()
         {
             string temp = string.Empty;
             for (int i = 0; i < Players.Count; i++)
             {
                 temp += Players[i].RemoveAllPairs();
             }
-            return temp;
+
+            if (temp != string.Empty)
+                Log.AddToLog(new LogMessage(temp,MessageType.cardMatch));
         }
 
         /// <summary>
@@ -173,11 +175,13 @@ namespace SortePerWpf
 
         void RemoveFinishedPlayers()
         {
-            
             for (int i = 0; i < Players.Count; i++)
             {
                 if (Players[i].PlayersCards.Count == 0)
+                {
+                    Log.AddToLog(new LogMessage(Players[i].Name + " was removed from the game",MessageType.playerRemoved));
                     Players.Remove(Players[i]);
+                }
                 
             }
         }

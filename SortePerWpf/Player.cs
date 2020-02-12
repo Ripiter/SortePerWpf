@@ -32,7 +32,7 @@ namespace SortePerWpf
       
 
 
-        public string RemovePairs(Card cardFromPlayer)
+        public void RemovePairs(Card cardFromPlayer)
         {
             string temp = string.Empty;
             foreach (Card card in PlayersCards.ToList())
@@ -46,7 +46,8 @@ namespace SortePerWpf
                     PlayersCards.Remove(cardFromPlayer);
                 }
             }
-            return temp;
+            if(temp != string.Empty)
+                Log.AddToLog(new LogMessage(this.Name + " " + temp, MessageType.cardMatch));
         }
 
 
