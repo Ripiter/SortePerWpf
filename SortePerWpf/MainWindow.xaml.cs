@@ -9,22 +9,25 @@ namespace SortePerWpf
     public partial class MainWindow : Window
     {
         Game game = new Game();
-        public MainWindow()
-        {
-            InitializeComponent();
-            game.Start();
-            steve.ItemsSource = game.Players;
-           
-            this.DataContext = this;
-
-            NextPlayer();
-        }
-
+        bool funmode = false;
         Player currentPlayer;
         Player nextPlayer;
         int currentPlayerIndex = 0;
         int nextPlayerIndex = 1;
         bool gameover = false;
+
+
+        public MainWindow()
+        {
+            InitializeComponent();
+            steve.ItemsSource = game.Players;
+            game.Start();
+
+            this.DataContext = this;
+
+            NextPlayer();
+        }
+
 
         private void NextPlayer()
         {
@@ -52,8 +55,6 @@ namespace SortePerWpf
             Log.AddToLog(new LogMessage("before " + nextPlayer.Name + " has " + nextPlayer.PlayersCards.Count), MessageType.playersTurn);
 
 
-            if (currentPlayer is Human)
-                Log.AddToLog(new LogMessage("Players turn"), MessageType.playerRemoved);
             if (currentPlayer is Computer)
                 ComputerTakeCard();
 
@@ -61,6 +62,7 @@ namespace SortePerWpf
             nextplayerText.DataContext = nextPlayer;
             MyTextBlock.DataContext = currentPlayer;
             ShowImageCards();
+
             //MyTextBlock.Dispatcher.BeginInvoke(new Action(() => MyTextBlock.DataContext = currentPlayer));
             //nextplayerText.Dispatcher.BeginInvoke(new Action(() => nextplayerText.DataContext = nextPlayer));
         }
@@ -88,15 +90,12 @@ namespace SortePerWpf
             Log.AddToLog(new LogMessage("after " + currentPlayer.Name + " has " + currentPlayer.PlayersCards.Count), MessageType.playersTurn);
             Log.AddToLog(new LogMessage("after " + nextPlayer.Name + " has " + nextPlayer.PlayersCards.Count), MessageType.playersTurn);
 
-            if (game.CheckForLooser())
-            {
-                gameover = true;
-                MessageBox.Show("And tonights bigest loser is: " + game.Players[0].Name);
-            }
             MyTextBlock.DataContext = RefreshPlayer(currentPlayer);
             nextplayerText.DataContext = RefreshPlayer(nextPlayer);
 
             ShowImageCards();
+
+            CheckForLoser();
 
             nextPlayerIndex++;
             currentPlayerIndex++;
@@ -109,16 +108,14 @@ namespace SortePerWpf
             int rndPos = new Random(DateTime.Now.Millisecond).Next(0, currentPlayer.PlayersCards.Count + 1);
             currentPlayer.PlayersCards.Insert(rndPos, card);
             currentPlayer.RemovePairs(card);
+
             Log.AddToLog(new LogMessage("after " + currentPlayer.Name + " has " + currentPlayer.PlayersCards.Count), MessageType.playersTurn);
             Log.AddToLog(new LogMessage("after " + nextPlayer.Name + " has " + nextPlayer.PlayersCards.Count), MessageType.playersTurn);
+
             nextPlayerIndex += 1;
             currentPlayerIndex += 1;
 
-            if (game.CheckForLooser())
-            {
-                gameover = true;
-                MessageBox.Show("And tonights bigest loser is: " + game.Players[0].Name);
-            }
+            CheckForLoser();
 
             NextPlayer();
         }
@@ -140,7 +137,17 @@ namespace SortePerWpf
             return pl;
         }
 
-        bool funmode = false;
+        void CheckForLoser()
+        {
+            if (game.CheckForLooser())
+            {
+                currentPlayer = game.Players[0];
+                ShowImageCards();
+                gameover = true;
+                MessageBox.Show("And tonights bigest loser is: " + game.Players[0].Name);
+            }
+        }
+
         public void ShowImageCards()
         {
             IFactory factory;
