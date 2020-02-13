@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Windows;
 namespace SortePerWpf
 {
@@ -15,8 +14,10 @@ namespace SortePerWpf
             InitializeComponent();
             game.Start();
             steve.ItemsSource = game.Players;
-            nextPlayerEvent += NextPlayer;
+           
             this.DataContext = this;
+
+            NextPlayer();
         }
 
         Player currentPlayer;
@@ -25,11 +26,9 @@ namespace SortePerWpf
         int nextPlayerIndex = 1;
         bool gameover = false;
 
-        public event EventHandler nextPlayerEvent;
-        private void NextPlayer(object sender, EventArgs e)
+        private void NextPlayer()
         {
-            if (gameover == true)
-                return;
+            NextPlayerButtonDisable();
 
             // Set next player in line
             if (nextPlayerIndex >= game.Players.Count)
@@ -51,43 +50,40 @@ namespace SortePerWpf
 
             Log.AddToLog(new LogMessage("before " + currentPlayer.Name + " has " + currentPlayer.PlayersCards.Count), MessageType.playersTurn);
             Log.AddToLog(new LogMessage("before " + nextPlayer.Name + " has " + nextPlayer.PlayersCards.Count), MessageType.playersTurn);
-           
+
+
+            if (currentPlayer is Human)
+                Log.AddToLog(new LogMessage("Players turn"), MessageType.playerRemoved);
+            if (currentPlayer is Computer)
+                ComputerTakeCard();
+
 
             nextplayerText.DataContext = nextPlayer;
             MyTextBlock.DataContext = currentPlayer;
             ShowImageCards();
             //MyTextBlock.Dispatcher.BeginInvoke(new Action(() => MyTextBlock.DataContext = currentPlayer));
             //nextplayerText.Dispatcher.BeginInvoke(new Action(() => nextplayerText.DataContext = nextPlayer));
-
-            
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void NextPlayerButton(object sender, RoutedEventArgs e)
         {
-            if (nextPlayerEvent != null)
-                nextPlayerEvent(this, new EventArgs());
+            if (gameover)
+                return;
+            NextPlayer();
         }
-        
+
         private void TakeCard(object sender, RoutedEventArgs e)
         {
-            if (currentPlayer is Human)
-            {
-                Card card = game.TakeCard(nextPlayer, 0);
-                int rndPos = new Random(DateTime.Now.Millisecond).Next(0, currentPlayer.PlayersCards.Count + 1);
-                currentPlayer.PlayersCards.Insert(rndPos, card);
-                currentPlayer.RemovePairs(card);
-            }
-            else
-            {
-                Card card = game.TakeCard(nextPlayer, 0);
-                int rndPos = new Random(DateTime.Now.Millisecond).Next(0, currentPlayer.PlayersCards.Count + 1);
-                currentPlayer.PlayersCards.Insert(rndPos, card);
-                currentPlayer.RemovePairs(card);
-                //nextPlayerIndex++;
-                //currentPlayerIndex++;
-                //if (nextPlayerEvent != null)
-                //    nextPlayerEvent(this, new EventArgs());
-            }
+            if (gameover)
+                return;
+
+            NextPlayerButtonDisable();
+
+            Card card = game.TakeCard(nextPlayer, 0);
+            int rndPos = new Random(DateTime.Now.Millisecond).Next(0, currentPlayer.PlayersCards.Count + 1);
+            currentPlayer.PlayersCards.Insert(rndPos, card);
+            currentPlayer.RemovePairs(card);
+
 
             Log.AddToLog(new LogMessage("after " + currentPlayer.Name + " has " + currentPlayer.PlayersCards.Count), MessageType.playersTurn);
             Log.AddToLog(new LogMessage("after " + nextPlayer.Name + " has " + nextPlayer.PlayersCards.Count), MessageType.playersTurn);
@@ -97,19 +93,40 @@ namespace SortePerWpf
                 gameover = true;
                 MessageBox.Show("And tonights bigest loser is: " + game.Players[0].Name);
             }
-            
+            MyTextBlock.DataContext = RefreshPlayer(currentPlayer);
+            nextplayerText.DataContext = RefreshPlayer(nextPlayer);
 
-            MyTextBlock.Dispatcher.BeginInvoke(new Action(() => MyTextBlock.DataContext = RefreshPlayer(currentPlayer)));
-            nextplayerText.Dispatcher.BeginInvoke(new Action(() => nextplayerText.DataContext = RefreshPlayer(nextPlayer)));
             ShowImageCards();
 
             nextPlayerIndex++;
             currentPlayerIndex++;
         }
+
+        void ComputerTakeCard()
+        {
+            NextPlayerButtonDisable();
+            Card card = game.TakeCard(nextPlayer, 0);
+            int rndPos = new Random(DateTime.Now.Millisecond).Next(0, currentPlayer.PlayersCards.Count + 1);
+            currentPlayer.PlayersCards.Insert(rndPos, card);
+            currentPlayer.RemovePairs(card);
+            Log.AddToLog(new LogMessage("after " + currentPlayer.Name + " has " + currentPlayer.PlayersCards.Count), MessageType.playersTurn);
+            Log.AddToLog(new LogMessage("after " + nextPlayer.Name + " has " + nextPlayer.PlayersCards.Count), MessageType.playersTurn);
+            nextPlayerIndex += 1;
+            currentPlayerIndex += 1;
+
+            if (game.CheckForLooser())
+            {
+                gameover = true;
+                MessageBox.Show("And tonights bigest loser is: " + game.Players[0].Name);
+            }
+
+            NextPlayer();
+        }
+
         Player RefreshPlayer(Player player)
         {
             Player pl = null;
-            if(player is Human)
+            if (player is Human)
             {
                 pl = new Human(player.Name);
                 pl.PlayersCards = player.PlayersCards;
@@ -142,6 +159,20 @@ namespace SortePerWpf
         {
             LogWindow win2 = new LogWindow();
             win2.Show();
+        }
+
+        private void NextPlayerButtonDisable()
+        {
+            if (nextPlayerB.IsEnabled)
+            {
+                nextPlayerB.IsEnabled = false;
+                takeCardB.IsEnabled = true;
+            }
+            else
+            {
+                nextPlayerB.IsEnabled = true;
+                takeCardB.IsEnabled = false;
+            }
         }
     }
 }

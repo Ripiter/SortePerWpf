@@ -24,8 +24,8 @@ namespace SortePerWpf
             {
                 new Human("Peter"),
                 new Human("Rene"),
-                new Human("Marc"),
-                new Computer("C1")
+                new Human("Marc")
+                //new Computer("C1"),
                 //new Computer("C2"),
                 //new Computer("C3"),
                 //new Computer("C4"),

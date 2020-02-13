@@ -62,8 +62,8 @@
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
-            <Button Content="next player" HorizontalAlignment="Left" Margin="189,57,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-            <Button Content="Take Card" HorizontalAlignment="Left" Margin="100,-20,0,0" VerticalAlignment="Top" Width="75" Click="TakeCard"/>
+            <Button Name="nextPlayerB" Content="next player" HorizontalAlignment="Left" Margin="189,57,0,0" VerticalAlignment="Top" Width="75" Click="NextPlayerButton"/>
+            <Button Name="takeCardB" Content="Take Card" HorizontalAlignment="Left" Margin="100,-20,0,0" VerticalAlignment="Top" Width="75" Click="TakeCard"/>
             
             <!-- TO DO: add item source for the images make a list of imagecard -->
         </StackPanel>
