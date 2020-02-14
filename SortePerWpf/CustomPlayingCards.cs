@@ -15,7 +15,7 @@ namespace SortePerWpf
 
             foreach (Card item in cards)
             {
-                path = "/Assets/Custom/" + item.ToString() + ".png";
+                path = "/Assets/customCards/" + item.ToString() + ".png";
                 ImageCard imgCard = new ImageCard(path, item);
                 displayCards.Add(imgCard);
             }

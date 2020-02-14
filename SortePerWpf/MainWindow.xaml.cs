@@ -9,7 +9,7 @@ namespace SortePerWpf
     public partial class MainWindow : Window
     {
         Game game = new Game();
-        bool funmode = false;
+        bool funmode = true;
         Player currentPlayer;
         Player nextPlayer;
         int currentPlayerIndex = 0;
@@ -166,6 +166,14 @@ namespace SortePerWpf
         {
             LogWindow win2 = new LogWindow();
             win2.Show();
+        }
+
+        private void FunModeButtonEvent(object sender, RoutedEventArgs e)
+        {
+            if (funmode == true)
+                funmode = false;
+            else
+                funmode = true;
         }
 
         private void NextPlayerButtonDisable()

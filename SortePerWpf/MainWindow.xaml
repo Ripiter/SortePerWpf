@@ -62,9 +62,10 @@
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
+            <Button Content="Fun mode" Margin="427,30,10,0" Height="26" Click="FunModeButtonEvent"/>
             <Button Name="nextPlayerB" Content="next player" HorizontalAlignment="Left" Margin="189,57,0,0" VerticalAlignment="Top" Width="75" Click="NextPlayerButton"/>
             <Button Name="takeCardB" Content="Take Card" HorizontalAlignment="Left" Margin="100,-20,0,0" VerticalAlignment="Top" Width="75" Click="TakeCard"/>
-            
+
             <!-- TO DO: add item source for the images make a list of imagecard -->
         </StackPanel>
         <Button Content="show log" Margin="571,42,105,54" Grid.Row="1" Click="Button_Click_1"/>
