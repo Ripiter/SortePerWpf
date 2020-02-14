@@ -223,5 +223,8 @@
     <Resource Include="Assets\customCards\twohearths.png" />
     <Resource Include="Assets\customCards\twospade.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\customCards\blackperspade.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
